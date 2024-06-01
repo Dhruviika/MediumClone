@@ -27,6 +27,9 @@ blogRouter.get("/all", async (c) => {
       },
     },
   });
+  if (!posts) {
+    return c.json({ message: "No posts found" });
+  }
 
   return c.json(posts);
 });
@@ -59,6 +62,10 @@ blogRouter.post("/post", async (c) => {
     },
   });
 
+  if (!res) {
+    return c.json({ message: "Post not created" });
+  }
+
   return c.json(res);
 });
 
@@ -82,6 +89,10 @@ blogRouter.get("/:id", async (c) => {
     },
   });
 
+  if (!posts) {
+    return c.json({ message: "No posts found" });
+  }
+
   return c.json(posts);
 });
 
@@ -104,5 +115,31 @@ blogRouter.put("/:id", async (c) => {
     },
   });
 
-  return c.json(res);
+  if (res) {
+    return c.json({ message: "Post updated successfully", res });
+  } else {
+    return c.json({ message: "Post not found" });
+  }
+});
+
+blogRouter.delete("/:id", async (c) => {
+  const prisma = new PrismaClient({
+    datasourceUrl: c.env.DATABASE_URL,
+  }).$extends(withAccelerate());
+
+  const userId = c.req.param("id");
+  const body = await c.req.json();
+
+  const res = await prisma.post.delete({
+    where: {
+      authorId: Number(userId),
+      id: body.id,
+    },
+  });
+
+  if (res) {
+    return c.json({ message: "Post deleted successfully" });
+  } else {
+    return c.json({ message: "Post not found" });
+  }
 });
