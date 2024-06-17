@@ -2,7 +2,11 @@ import { Hono } from "hono";
 import { userRouter } from "./routes/signup";
 import { blogRouter } from "./routes/blog";
 import { authenticateRoute } from "./middleware";
+import { cors } from "hono/cors";
+
 const app = new Hono();
+
+app.use(cors());
 
 app.get("/", (c) => c.text("Hello Cloudflare Workers!"));
 
