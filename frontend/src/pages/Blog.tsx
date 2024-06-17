@@ -1,7 +1,13 @@
+import { Navbar } from "../components/Navbar";
+import { StepInto } from "../components/StepInto";
+import { CustomCategory } from "../components/CustomCategory";
+
 export const Blog = () => {
   return (
     <div>
-      <h1>Blog</h1>
+      <Navbar />
+      <StepInto />
+      <CustomCategory />
     </div>
   );
 };
