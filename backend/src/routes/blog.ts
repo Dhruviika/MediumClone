@@ -69,12 +69,12 @@ blogRouter.post("/post", async (c) => {
   return c.json(res);
 });
 
-blogRouter.get("/:id", async (c) => {
+blogRouter.get("/myblog", async (c) => {
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate());
 
-  const userId = c.req.param("id");
+  const userId = c.get("jwtPayload");
 
   const posts = await prisma.post.findMany({
     where: {
