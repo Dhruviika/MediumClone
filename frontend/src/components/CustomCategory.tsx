@@ -2,19 +2,16 @@ import { ImageGeneration } from "./ImageGeneration";
 import { Cloudinary } from "@cloudinary/url-gen/index";
 import { AdvancedImage } from "@cloudinary/react";
 
-const cld = new Cloudinary({
-  cloud: {
-    cloudName: "droyw0akp",
-  },
-});
+// const cld = new Cloudinary({
+//   cloud: {
+//     cloudName: "droyw0akp",
+//   },
+// });
 
 const DetailedCard = () => {
-  let Imgs = [];
-  Imgs = ImageGeneration({ category: "food", numberofImages: 1 });
-
   return (
     <div className=" bg-gray-300 w-72 h-80">
-      <AdvancedImage cldImg={cld.image("pancake")} />
+      {/* <AdvancedImage cldImg={cld.image("pancake")} /> */}
       <div>Blissful Bites</div>
     </div>
   );
