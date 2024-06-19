@@ -1,11 +1,9 @@
-import { faker } from "@faker-js/faker";
 import { LuAlignJustify } from "react-icons/lu";
 import { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import { Link } from "react-router-dom";
 
 export const Navbar = () => {
-  const avatar = faker.image.avatar();
   const [showMenu, setShowMenu] = useState(false);
 
   return (
