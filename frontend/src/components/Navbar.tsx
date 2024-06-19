@@ -2,6 +2,7 @@ import { faker } from "@faker-js/faker";
 import { LuAlignJustify } from "react-icons/lu";
 import { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
+import { Link } from "react-router-dom";
 
 export const Navbar = () => {
   const avatar = faker.image.avatar();
@@ -9,17 +10,17 @@ export const Navbar = () => {
 
   return (
     <>
-      <div className="flex justify-between border-2 p-5">
+      <div className="flex justify-between border-b-2 p-5">
         <div className="flex text-3xl font-bold justify-center items-center">
-          Blogxpress.
+          <Link to={"/blogs"}>Blogxpress.</Link>
         </div>
         <div className="hidden lg:flex gap-12 items-center">
-          <a href="#" className="font-medium">
+          <Link to={"/blogs"} className="font-medium">
             Home
-          </a>
-          <a href="#" className="font-medium">
-            Blogs
-          </a>
+          </Link>
+          <Link to={"/blogs"} className="font-medium">
+            Blog
+          </Link>
           <a href="#" className="font-medium">
             About
           </a>
@@ -28,10 +29,15 @@ export const Navbar = () => {
           </a>
         </div>
         <div className="hidden lg:flex items-center justify-end">
-          <div className="px-10 border-2 rounded-full py-3 mx-3">
-            Contact Us
+          <div className="px-10 rounded-full py-3 mx-3 bg-orange-500 text-white">
+            <Link to={"/new-story"}>Publish</Link>
           </div>
-          <img className="rounded-full w-12 h-12" src={avatar} alt="avatar" />
+
+          <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
+            <span className="font-medium text-gray-600 dark:text-gray-300">
+              D
+            </span>
+          </div>
         </div>
         <div className="lg:hidden" onClick={() => setShowMenu(true)}>
           <LuAlignJustify className="text-3xl" />
