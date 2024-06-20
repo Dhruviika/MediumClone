@@ -8,15 +8,15 @@ export const Navbar = () => {
 
   return (
     <>
-      <div className="flex justify-between border-b-2 p-5">
+      <div className="flex justify-between p-5">
         <div className="flex text-3xl font-bold justify-center items-center">
-          <Link to={"/blogs"}>Blogxpress.</Link>
+          <Link to={"/home"}>Blogxpress.</Link>
         </div>
         <div className="hidden lg:flex gap-12 items-center">
-          <Link to={"/blogs"} className="font-medium">
+          <Link to={"/home"} className="font-medium">
             Home
           </Link>
-          <Link to={"/blogs"} className="font-medium">
+          <Link to={"/home"} className="font-medium">
             Blog
           </Link>
           <a href="#" className="font-medium">
@@ -27,14 +27,12 @@ export const Navbar = () => {
           </a>
         </div>
         <div className="hidden lg:flex items-center justify-end">
-          <div className="px-10 rounded-full py-3 mx-3 bg-orange-500 text-white">
+          <div className="px-10 rounded-full py-3 mx-3 border-2 font-medium hover:bg-[#DAD05F]">
             <Link to={"/new-story"}>Publish</Link>
           </div>
 
-          <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
-            <span className="font-medium text-gray-600 dark:text-gray-300">
-              D
-            </span>
+          <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-200 rounded-full border-2">
+            <span className="font-medium">D</span>
           </div>
         </div>
         <div className="lg:hidden" onClick={() => setShowMenu(true)}>

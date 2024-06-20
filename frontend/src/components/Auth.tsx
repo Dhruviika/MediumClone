@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 import axios from "axios";
+import { Spinner } from "./Spinner";
 
 interface InputBoxProps {
   label: string;
@@ -45,10 +46,12 @@ export const AuthComponent = ({ type }: { type: "signup" | "signin" }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const handleSubmitSignup = async () => {
+    setLoading(true);
     try {
       const res = await axios.post(
         "https://backend.cornstar.workers.dev/api/v1/user/signup",
@@ -62,14 +65,16 @@ export const AuthComponent = ({ type }: { type: "signup" | "signin" }) => {
       if (res) {
         const jwt = res.data.token;
         localStorage.setItem("token", jwt);
-        navigate("/blogs");
+        navigate("/home");
       }
     } catch (e) {
       console.log(e);
     }
+    setLoading(false);
   };
 
   const handleSubmitLogin = async () => {
+    setLoading(true);
     try {
       const res = await axios.post(
         "https://backend.cornstar.workers.dev/api/v1/user/signin",
@@ -82,11 +87,12 @@ export const AuthComponent = ({ type }: { type: "signup" | "signin" }) => {
       if (res) {
         const jwt = res.data.token;
         localStorage.setItem("token", jwt);
-        navigate("/blogs");
+        navigate("/home");
       }
     } catch (e) {
       console.log(e);
     }
+    setLoading(false);
   };
 
   return (
@@ -119,9 +125,9 @@ export const AuthComponent = ({ type }: { type: "signup" | "signin" }) => {
       <button
         type="button"
         onClick={type == "signup" ? handleSubmitSignup : handleSubmitLogin}
-        className="transform bg-orange-400 text-sm px-20 py-2.5 me-2 mb-2 mt-8 rounded-full text-white hover:bg-orange-600 transition duration-700 hover:scale-125 flex justify-center items-center "
+        className="transform bg-[#DAD05F] text-sm px-20 py-2.5 me-2 mb-2 mt-8 rounded-full text-white hover:bg-orange-400 transition duration-700 hover:scale-125 flex justify-center items-center "
       >
-        {type == "signup" ? "Sign Up" : "Login"}
+        {loading ? <Spinner /> : type == "signup" ? "Signup" : "Login"}
       </button>
     </div>
   );

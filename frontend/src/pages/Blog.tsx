@@ -4,10 +4,11 @@ import { CustomCategory } from "../components/CustomCategory";
 
 export const Blog = () => {
   return (
-    <div>
+    <div className="bg-orange-bg bg-cover bg-center h-svh">
       <Navbar />
       <StepInto />
-      <CustomCategory />
+
+      {/* <CustomCategory /> */}
     </div>
   );
 };
