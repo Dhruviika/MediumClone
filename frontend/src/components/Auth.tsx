@@ -127,7 +127,13 @@ export const AuthComponent = ({ type }: { type: "signup" | "signin" }) => {
         onClick={type == "signup" ? handleSubmitSignup : handleSubmitLogin}
         className="transform bg-[#DAD05F] text-sm px-20 py-2.5 me-2 mb-2 mt-8 rounded-full text-white hover:bg-orange-400 transition duration-700 hover:scale-125 flex justify-center items-center "
       >
-        {loading ? <Spinner /> : type == "signup" ? "Signup" : "Login"}
+        {loading ? (
+          <Spinner color="fill-bg[#DAD05F]" />
+        ) : type == "signup" ? (
+          "Signup"
+        ) : (
+          "Login"
+        )}
       </button>
     </div>
   );
