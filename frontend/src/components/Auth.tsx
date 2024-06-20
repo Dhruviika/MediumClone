@@ -99,7 +99,7 @@ export const AuthComponent = ({ type }: { type: "signup" | "signin" }) => {
 
         <Link
           className="text-sm font-thin ml-1 underline"
-          to={type == "signup" ? "/signin" : "/signup"}
+          to={type == "signup" ? "/signin" : "/"}
         >
           {type == "signup" ? "Login" : "Signup"}
         </Link>
@@ -119,7 +119,7 @@ export const AuthComponent = ({ type }: { type: "signup" | "signin" }) => {
       <button
         type="button"
         onClick={type == "signup" ? handleSubmitSignup : handleSubmitLogin}
-        className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none mt-8 focus:ring-4 focus:ring-gray-300 font-medium rounded-2xl text-sm px-20 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+        className="transform bg-orange-400 text-sm px-20 py-2.5 me-2 mb-2 mt-8 rounded-full text-white hover:bg-orange-600 transition duration-700 hover:scale-125 flex justify-center items-center "
       >
         {type == "signup" ? "Sign Up" : "Login"}
       </button>

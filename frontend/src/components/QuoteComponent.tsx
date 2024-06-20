@@ -1,6 +1,6 @@
 export const QuoteComponent = () => {
   return (
-    <div className="bg-gray-200 h-screen flex flex-col justify-center px-36">
+    <div className="bg-transparent h-screen flex flex-col justify-center px-36">
       <div className="font-semibold text-2xl text-justify">
         "The customer service i recevied was exceptional. The suuport team went
         above and beyond to address my concerns."
