@@ -4,16 +4,18 @@ import { Signup } from "./pages/Signup";
 import { Signin } from "./pages/Signin";
 import { Blog } from "./pages/Blog";
 import { NewStory } from "./pages/NewStory";
+import { UserBlogs } from "./pages/UserBlogs";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
           <Route path="/blogs" element={<Blog />} />
           <Route path="/new-story" element={<NewStory />} />
+          <Route path="/me" element={<UserBlogs />} />
         </Routes>
       </BrowserRouter>
     </>
