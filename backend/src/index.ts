@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { userRouter } from "./routes/signup";
+import { userRouter } from "./routes/user";
 import { blogRouter } from "./routes/blog";
 import { authenticateRoute } from "./middleware";
 import { cors } from "hono/cors";

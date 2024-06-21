@@ -7,7 +7,7 @@ export const authenticateRoute = new Hono<{
   };
 }>();
 
-authenticateRoute.use("/blog/*", async (c, next) => {
+authenticateRoute.use("/*", async (c, next) => {
   const jwt = c.req.header("Authorization");
   if (!jwt) {
     c.status(401);
