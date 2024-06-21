@@ -17,7 +17,7 @@ export const Navbar = () => {
           <Link to={"/home"} className="font-medium">
             Home
           </Link>
-          <Link to={"/home"} className="font-medium">
+          <Link to={"/me"} className="font-medium">
             Blog
           </Link>
           <a href="#" className="font-medium">
@@ -34,9 +34,11 @@ export const Navbar = () => {
             </div>
           )}
 
-          <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-200 rounded-full border-2">
-            <span className="font-medium">D</span>
-          </div>
+          <Link to={"/profile"}>
+            <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-200 rounded-full border-2">
+              <span className="font-medium">D</span>
+            </div>
+          </Link>
         </div>
         <div className="lg:hidden" onClick={() => setShowMenu(true)}>
           <LuAlignJustify className="text-3xl" />

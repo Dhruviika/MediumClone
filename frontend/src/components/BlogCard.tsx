@@ -1,6 +1,7 @@
 import { Blog } from "../pages/UserBlogs";
+import { useNavigate } from "react-router-dom";
 
-function DateFormatter(date: string) {
+export function DateFormatter(date: string) {
   const formattedDate = new Date(date).toLocaleDateString("en-US", {
     day: "numeric",
     month: "long",
@@ -9,10 +10,20 @@ function DateFormatter(date: string) {
   return formattedDate;
 }
 
-export const BlogCard = ({ title, content, name, createdAt }: Blog) => {
+export const BlogCard = ({ title, content, author, createdAt, id }: Blog) => {
   const formattedDate = DateFormatter(createdAt);
+  const navigate = useNavigate();
+
+  const onBlogSelect = () => {
+    navigate(`/blog/${id}`);
+  };
+
   return (
-    <div className="flex h-auto m-10 rounded-md items-center">
+    <div
+      className="flex h-auto m-10 rounded-md items-center"
+      key={id}
+      onClick={onBlogSelect}
+    >
       <div className="flex w-1/3">
         <img src="https://via.placeholder.com/300" alt="blog" />
       </div>
@@ -24,13 +35,13 @@ export const BlogCard = ({ title, content, name, createdAt }: Blog) => {
             </span>
           </div>
           <span>•</span>
-          <div>{name}</div>
+          <div>{author.name}</div>
         </div>
-        <div className=" font-bold text-2xl">{title}</div>
+        <div className=" cursor-pointer font-bold text-2xl">{title}</div>
         {content.length > 150 ? (
           <div>
             {content.slice(0, 150)}...
-            <span className="text-blue-500">Read more</span>
+            <span className="text-blue-500 cursor-pointer">Read more</span>
           </div>
         ) : (
           <div>{content}</div>
