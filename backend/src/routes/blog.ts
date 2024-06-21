@@ -86,6 +86,45 @@ blogRouter.get("/myblog", async (c) => {
       createdAt: true,
       updatedAt: true,
       content: true,
+      author: {
+        select: {
+          name: true,
+        },
+      },
+    },
+  });
+
+  if (!posts) {
+    return c.json({ message: "No posts found" });
+  }
+
+  return c.json(posts);
+});
+
+blogRouter.get("/:id", async (c) => {
+  const prisma = new PrismaClient({
+    datasourceUrl: c.env.DATABASE_URL,
+  }).$extends(withAccelerate());
+
+  const userId = c.get("jwtPayload");
+  const id = c.req.param("id");
+
+  const posts = await prisma.post.findMany({
+    where: {
+      authorId: Number(userId),
+      id: Number(id),
+    },
+    select: {
+      id: true,
+      title: true,
+      createdAt: true,
+      updatedAt: true,
+      content: true,
+      author: {
+        select: {
+          name: true,
+        },
+      },
     },
   });
 
@@ -101,17 +140,30 @@ blogRouter.put("/:id", async (c) => {
     datasourceUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate());
 
-  const userId = c.req.param("id");
+  const userId = c.get("jwtPayload");
+  const id = c.req.param("id");
   const body = await c.req.json();
 
   const res = await prisma.post.update({
     where: {
       authorId: Number(userId),
-      id: body.id,
+      id: Number(id),
     },
     data: {
       title: body.title,
       content: body.content,
+    },
+    select: {
+      id: true,
+      title: true,
+      createdAt: true,
+      updatedAt: true,
+      content: true,
+      author: {
+        select: {
+          name: true,
+        },
+      },
     },
   });
 
@@ -127,13 +179,13 @@ blogRouter.delete("/:id", async (c) => {
     datasourceUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate());
 
-  const userId = c.req.param("id");
-  const body = await c.req.json();
+  const userId = c.get("jwtPayload");
+  const id = c.req.param("id");
 
   const res = await prisma.post.delete({
     where: {
       authorId: Number(userId),
-      id: body.id,
+      id: Number(id),
     },
   });
 

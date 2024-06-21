@@ -56,3 +56,36 @@ userRouter.post("signin", async (c) => {
 
   return c.json({ token });
 });
+
+userRouter.get("/me", async (c) => {
+  const prisma = new PrismaClient({
+    datasourceUrl: c.env.DATABASE_URL,
+  }).$extends(withAccelerate());
+
+  const userId = c.get("jwtPayload");
+  const user = await prisma.user.findUnique({
+    where: {
+      id: userId,
+    },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      posts: {
+        select: {
+          id: true,
+          title: true,
+          content: true,
+          createdAt: true,
+          updatedAt: true,
+        },
+      },
+    },
+  });
+
+  if (!user) {
+    return c.json({ error: "User not found" });
+  }
+
+  return c.json(user);
+});
