@@ -5,6 +5,7 @@ import { Navbar } from "../components/Navbar";
 import { TopPosts } from "../components/TopPosts";
 import { Link } from "react-router-dom";
 import { HiOutlineArrowLongRight } from "react-icons/hi2";
+import { BlogCardSkeleton } from "../components/Skeleton";
 
 export interface author {
   name: string;
@@ -21,7 +22,10 @@ export interface Blog {
 
 export const UserBlogs = () => {
   const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
+    setLoading(true);
     const fetchBlogs = async () => {
       try {
         const res = await axios.get(
@@ -35,17 +39,23 @@ export const UserBlogs = () => {
         setBlogs(res.data);
       } catch (e) {
         console.log(e);
+      } finally {
+        setLoading(false);
       }
     };
     fetchBlogs();
   }, []);
 
-  console.log(blogs);
   return (
-    <div className="bg-gradient-to-r from-[#DAD05F] to-white h-full">
+    <div className="h-full">
       <Navbar />
       <div className="flex">
-        {blogs.length == 0 ? (
+        {loading ? (
+          <div className="mt-10 ml-16 mr-5 flex flex-col gap-5  w-2/3">
+            <BlogCardSkeleton />
+            <BlogCardSkeleton />
+          </div>
+        ) : blogs?.length == 0 ? (
           <div className="flex flex-col justify-center items-center mt-10 ml-16 w-2/3 ">
             <div className="text-4xl font-bold leading-tight lg:text-6xl">
               Write your first blog...

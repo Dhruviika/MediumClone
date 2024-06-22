@@ -4,12 +4,15 @@ import { useEffect, useState } from "react";
 import { Blog } from "../pages/UserBlogs";
 import { Navbar } from "../components/Navbar";
 import { DateFormatter } from "../components/BlogCard";
+import { BlogSkeleton } from "../components/Skeleton";
 
 export const BlogScreen = () => {
   const { id } = useParams();
   const [blog, setBlog] = useState<Blog | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const fetchData = async () => {
+    setLoading(true);
     const res = await axios.get(
       `https://backend.cornstar.workers.dev/api/v1/blog/${id}`,
       {
@@ -19,6 +22,7 @@ export const BlogScreen = () => {
       }
     );
     setBlog(res?.data[0]);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -32,21 +36,27 @@ export const BlogScreen = () => {
       <Navbar />
       <div className="flex justify-center">
         <div className="flex flex-col items-start mt-10 bg-white w-2/3 p-5 mb-5 rounded-md">
-          <div className="text-4xl font-semibold">{blog?.title}</div>
-          <div className="flex gap-4 py-5">
-            <div className="flex items-center">
-              <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-200 rounded-full border-2">
-                <span className="font-medium">D</span>
+          {loading ? (
+            <BlogSkeleton />
+          ) : (
+            <>
+              <div className="text-4xl font-semibold">{blog?.title}</div>
+              <div className="flex gap-4 py-5">
+                <div className="flex items-center">
+                  <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-200 rounded-full border-2">
+                    <span className="font-medium">D</span>
+                  </div>
+                </div>
+                <div className="flex flex-col justify-start">
+                  <div className=" font-medium">{blog?.author?.name}</div>
+                  <div className=" text-gray-600 flex gap-2">
+                    {Math.ceil(contentLength / 100)} min read
+                    <span>•</span> {formattedDate}
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="flex flex-col justify-start">
-              <div className=" font-medium">{blog?.author.name}</div>
-              <div className=" text-gray-600 flex gap-2">
-                {Math.ceil(contentLength / 100)} min read
-                <span>•</span> {formattedDate}
-              </div>
-            </div>
-          </div>
+            </>
+          )}
           <div className="flex flex-col items-center w-full p-5 border-t-2 mb-5">
             <img
               className="rounded-sm"
