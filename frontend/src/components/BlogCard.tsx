@@ -11,7 +11,8 @@ export function DateFormatter(date: string) {
 }
 
 export const BlogCard = ({ title, content, author, createdAt, id }: Blog) => {
-  const formattedDate = DateFormatter(createdAt);
+  const formattedDate = DateFormatter(createdAt || "");
+  const contentLength = content?.length || 0;
   const navigate = useNavigate();
 
   const onBlogSelect = () => {
@@ -35,19 +36,19 @@ export const BlogCard = ({ title, content, author, createdAt, id }: Blog) => {
             </span>
           </div>
           <span>•</span>
-          <div>{author.name}</div>
+          <div>{author?.name}</div>
         </div>
         <div className=" cursor-pointer font-bold text-2xl">{title}</div>
-        {content.length > 150 ? (
+        {contentLength > 150 ? (
           <div>
-            {content.slice(0, 150)}...
+            {content?.slice(0, 150)}...
             <span className="text-blue-500 cursor-pointer">Read more</span>
           </div>
         ) : (
           <div>{content}</div>
         )}
         <div className="flex gap-3 items-center">
-          <div>{Math.ceil(content.length / 100)} min read</div>
+          <div>{Math.ceil(contentLength / 100)} min read</div>
           <span>•</span>
           <div>{formattedDate}</div>
         </div>
