@@ -48,16 +48,16 @@ export const BlogUpdate = () => {
           },
         }
       );
-      setTitle(res.data.title);
-      setContent(res.data.content);
+
+      setTitle(res.data[0].title);
+      setContent(res.data[0].content);
     } catch (e) {
       console.log(e);
     }
   };
 
   useEffect(() => {
-    const id = localStorage.getItem("id");
-    if (id) {
+    if (updateId) {
       getBlog();
     }
   }, []);

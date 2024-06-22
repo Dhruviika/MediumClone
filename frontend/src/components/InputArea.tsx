@@ -8,9 +8,16 @@ export const InputArea = ({
   setTitle,
   content,
   setContent,
+}: {
+  handleSubmit: () => void;
+  loading: boolean;
+  title: string;
+  setTitle: (title: string) => void;
+  content: string;
+  setContent: (content: string) => void;
 }) => {
   return (
-    <div className="bg-gradient-to-r from-[#DAD05F] to-white">
+    <div>
       <Navbar />
 
       <div className="flex flex-col mt-5 gap-5 items-center">

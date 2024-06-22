@@ -21,7 +21,7 @@ function App() {
           <Route path="/me" element={<UserBlogs />} />
           <Route path="/blog/:id" element={<BlogScreen />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/update/:id" element={<BlogUpdate />} />
+          <Route path="/update/:updateId" element={<BlogUpdate />} />
         </Routes>
       </BrowserRouter>
     </>
