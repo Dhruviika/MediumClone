@@ -1,11 +1,10 @@
 import { LuAlignJustify } from "react-icons/lu";
 import { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
-  const location = useLocation();
 
   return (
     <>
@@ -28,15 +27,13 @@ export const Navbar = () => {
           </a>
         </div>
         <div className="hidden lg:flex items-center justify-end">
-          {location.pathname != "/new-story" && (
-            <div className="px-10 rounded-full py-3 mx-3 border-2 font-medium hover:bg-[#DAD05F] hover:text-white">
-              <Link to={"/new-story"}>Publish</Link>
-            </div>
-          )}
+          <div className="px-10 rounded-full py-3 mx-3 border-2 font-medium hover:bg-[#DAD05F] hover:text-white">
+            <Link to={"/new-story"}>Publish</Link>
+          </div>
 
           <Link to={"/profile"}>
             <div className="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-200 rounded-full border-2">
-              <span className="font-medium">D</span>
+              <span className="font-medium">P</span>
             </div>
           </Link>
         </div>
